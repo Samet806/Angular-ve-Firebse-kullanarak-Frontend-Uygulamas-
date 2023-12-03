@@ -1,0 +1,42 @@
+<!-- <product [prd]="selectedProduct" (unSelectEvent)="unSelectProduct()" *ngIf="selectedProduct"></product> -->
+<div *ngIf="!loading">
+  <div *ngIf="products.length > 0 ; else noProducts">
+    <ng-template [ngTemplateOutlet]="productList" [ngTemplateOutletContext]="{products:products}"></ng-template>
+  </div>
+</div>
+
+
+<ng-template #productList let-products="products">
+  <div *ngFor="let product of products">
+    <div class="card mb-3 p-1" *ngIf="product.isActive">
+      <div class="row">
+        <div class="col-3">
+          <img
+            src="/assets/images/{{ product.imageUrl }} "
+            class="img-fluid rounded-start"
+            alt=""
+          />
+        </div>
+        <div class="col-9">
+          <div class="card-body">
+            <h5 class="card-title">{{ product.name }}</h5>
+            <p class="card-text">{{ product.description }}</p>
+            <!-- <button (click)="selectProduct(product)" class="btn btn-primary">Ürünü seç</button> -->
+            <a  routerLink="/products/{{product.id}}" class="btn btn-primary">Ürünü Detay</a>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+
+<ng-template #noProducts>
+  <div class="alert alert-warning">no Products</div>
+</ng-template>
+
+<div class="spinner-border text-primary" *ngIf="loading" role="status">
+  <span class="visually-hidden">Loading...</span>
+  </div>

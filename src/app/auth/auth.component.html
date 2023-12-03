@@ -1,0 +1,30 @@
+<h3   class="text-center">{{isLoginMode ? "Sign in": "Sign Up"}}</h3>
+
+<div class="alert alert-primary" *ngIf="error">
+  {{error}}
+</div>
+
+<form #form="ngForm" (ngSubmit)="handleAuth(form)" >
+  <div class="mb-3">
+    <label for="email" class="form-label">Email</label>
+    <input type="email" email required="" ngModel name="email" id="email" class="form-control">
+  </div>
+
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input type="password" required minlength="6"  ngModel  name="password" id="password" class="form-control">
+  </div>
+
+  <div class="d-grid gap-2">
+    <button type="submit" [disabled]="form.invalid" class="btn btn-primary">{{isLoginMode ? "Sign in": "Sign Up"}}</button>
+    <button type="button" class="btn btn-outline-primary" (click)="changeToggle()">
+    {{isLoginMode?"Henüz hesabım yok":"Zaten Hesabım var"}}
+    </button>
+  </div>
+
+  <div class="spinner-border text-primary" *ngIf="loading" role="status">
+    <span class="visually-hidden">Loading...</span>
+    </div>
+      
+
+</form>
